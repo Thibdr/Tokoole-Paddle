@@ -86,9 +86,11 @@ with left_column:
             {"Genre": repartitions[1][0], "Nombre": repartitions[1][1]}
         ]
         df_repartitions = pd.DataFrame(repartitions)
-        fig = px.pie(df_repartitions, names='Genre', values='Nombre', title='Répartition par genre')
-        fig.update_traces(hoverinfo='label+percent+value+name', 
-            hovertemplate='%{label} : %{value} <extra></extra>')
+        color_discrete_map = {'Homme': '#3471eb', 'Femme': '#eb34ab'}
+        fig = px.pie(df_repartitions, names='Genre', values='Nombre',
+                    color='Genre', color_discrete_map=color_discrete_map)
+        fig.update_traces(hoverinfo='label+percent+value+name',
+                        hovertemplate='%{label} : %{value} <extra></extra>')
         st.plotly_chart(fig)
 
         unpaid_members = get_unpaid_members()
